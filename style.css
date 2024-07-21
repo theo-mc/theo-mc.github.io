@@ -1,0 +1,79 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: "Courier New", Courier, monospace;
+    background-color: #0c0c0c;
+    color: #00ff00;
+    line-height: 1.6;
+    height: 100%;
+}
+.terminal {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 20px #00ff00;
+    overflow-wrap: break-word;
+    height: calc(100% - 40px);
+    overflow-y: auto;
+    position: relative;
+}
+.prompt::before {
+    content: "guest@your-name:~$ ";
+    color: #0099ff;
+}
+.command {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+.output {
+    margin-bottom: 20px;
+}
+h1,
+h2 {
+    color: #ff9900;
+    border-bottom: 1px solid #ff9900;
+    padding-bottom: 5px;
+}
+ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+li::before {
+    content: "> ";
+    color: #ff9900;
+}
+#user-input {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: inherit;
+    width: 100%;
+    padding: 5px;
+}
+#user-input:focus {
+    outline: none;
+}
+.hidden {
+    display: none;
+}
+.highlight {
+    color: #ff00ff;
+}
+.blink {
+    animation: blink-animation 1s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+@media (max-width: 600px) {
+    .terminal {
+        margin: 10px;
+        padding: 10px;
+        height: calc(100% - 20px);
+    }
+}
