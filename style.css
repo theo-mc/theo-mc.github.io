@@ -387,18 +387,38 @@ blockquote {
     }
     #main-content {
         margin-left: 0;
+        padding: 16px;
     }
     #sidebar:not(.collapsed) {
         transform: translateX(0);
     }
     .terminal {
-        padding: 16px;
-        font-size: 12px;
+        padding: 12px;
+        font-size: 14px;
     }
     #user-input {
-        width: calc(100% - 20px);
+        width: calc(100% - 16px);
     }
     #top-nav h1 {
         font-size: 1rem;
     }
+    .window-controls {
+        display: none;
+    }
+    #theme-selector {
+        padding: 8px;
+    }
+    #theme-select {
+        font-size: 12px;
+    }
 }
+
+@media (max-width: 480px) {
+    .terminal {
+        font-size: 12px;
+    }
+    #top-nav h1 {
+        font-size: 0.9rem;
+    }
+}
+

@@ -25,7 +25,8 @@ class Terminal {
 		cat: this.catCommand.bind(this),
 		echo: this.echoCommand.bind(this),
 	  };
-  
+
+	  this.loadCommandHistory();
 	  this.init();
   }
 
@@ -63,6 +64,17 @@ class Terminal {
 	});
   }
 
+  loadCommandHistory() {
+    const savedHistory = localStorage.getItem('commandHistory');
+    if (savedHistory) {
+      this.commandHistory = JSON.parse(savedHistory);
+    }
+  }
+
+  saveCommandHistory() {
+    localStorage.setItem('commandHistory', JSON.stringify(this.commandHistory.slice(0, 50)));
+  }
+
   changeTheme() {
 	const theme = this.themeSelect.value;
 	document.body.className = theme !== "default" ? `theme-${theme}` : "";
@@ -76,6 +88,7 @@ class Terminal {
 
   handleUserInput(event) {
 	if (event.key === "Enter") {
+	  this.saveCommandHistory();
 	  const cmd = this.userInput.value.trim();
 	  if (cmd) {
 		this.commandHistory.unshift(cmd);
@@ -106,16 +119,29 @@ class Terminal {
   }
 
   autocomplete() {
-	const input = this.userInput.value.toLowerCase();
-	const matchingCommands = Object.keys(this.commands).filter((cmd) =>
-	  cmd.startsWith(input),
-	);
-	if (matchingCommands.length === 1) {
-	  this.userInput.value = matchingCommands[0];
-	} else if (matchingCommands.length > 1) {
-	  this.addToTerminal(`Matching commands: ${matchingCommands.join(", ")}`);
-	}
+    const input = this.userInput.value.toLowerCase();
+    const matchingCommands = Object.keys(this.commands).filter((cmd) =>
+      cmd.startsWith(input)
+    );
+    if (matchingCommands.length === 1) {
+      this.userInput.value = matchingCommands[0];
+    } else if (matchingCommands.length > 1) {
+      const commonPrefix = this.findCommonPrefix(matchingCommands);
+      this.userInput.value = commonPrefix;
+      this.addToTerminal(`Matching commands: ${matchingCommands.join(", ")}`);
+    }
   }
+
+  findCommonPrefix(strings) {
+    if (strings.length === 0) return '';
+    return strings.reduce((prefix, string) => {
+      while (string.indexOf(prefix) !== 0) {
+        prefix = prefix.substring(0, prefix.length - 1);
+      }
+      return prefix;
+    });
+  }
+
 
   runCommand(cmd) {
 	this.addToTerminal(cmd, true);
