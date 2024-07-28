@@ -1,0 +1,219 @@
+/* Improved Default theme (Green-based) */
+:root {
+    --base00: #0a1f0a; /* Darker background for better contrast */
+    --base01: #1a2f1a; /* Slightly lighter than base00 for elements */
+    --base02: #2a3f2a; /* For highlights and separators */
+    --base03: #4a5f4a; /* Muted green for less important text */
+    --base04: #6a7f6a; /* Brighter green for hovered text */
+    --base05: #b0d4b0; /* Main text color, soft green */
+    --base06: #c0e4c0; /* Brighter text for emphasis */
+    --base07: #e0ffe0; /* Brightest green, use sparingly */
+    --base08: #ff6b6b; /* Red for warnings or deletions */
+    --base09: #feca57; /* Orange for types or keywords */
+    --base0A: #ffd700; /* Yellow for strings or values */
+    --base0B: #7cec7c; /* Bright green for inserted text */
+    --base0C: #48d1cc; /* Cyan for regex or escaped characters */
+    --base0D: #5ca3ff; /* Blue for links or headings */
+    --base0E: #d371ff; /* Magenta for special text */
+    --base0F: #ff9966; /* Brown for deprecated features */
+}
+
+/* Tomorrow theme */
+.theme-tomorrow {
+    --base00: #ffffff;
+    --base01: #e0e0e0;
+    --base02: #d6d6d6;
+    --base03: #8e908c;
+    --base04: #969896;
+    --base05: #4d4d4c;
+    --base06: #282a2e;
+    --base07: #1d1f21;
+    --base08: #c82829;
+    --base09: #f5871f;
+    --base0A: #eab700;
+    --base0B: #718c00;
+    --base0C: #3e999f;
+    --base0D: #4271ae;
+    --base0E: #8959a8;
+    --base0F: #a3685a;
+}
+
+/* Monokai theme */
+.theme-monokai {
+    --base00: #272822;
+    --base01: #383830;
+    --base02: #49483e;
+    --base03: #75715e;
+    --base04: #a59f85;
+    --base05: #f8f8f2;
+    --base06: #f5f4f1;
+    --base07: #f9f8f5;
+    --base08: #f92672;
+    --base09: #fd971f;
+    --base0A: #f4bf75;
+    --base0B: #a6e22e;
+    --base0C: #a1efe4;
+    --base0D: #66d9ef;
+    --base0E: #ae81ff;
+    --base0F: #cc6633;
+}
+
+/* Solarized theme */
+.theme-solarized {
+    --base00: #002b36;
+    --base01: #073642;
+    --base02: #586e75;
+    --base03: #657b83;
+    --base04: #839496;
+    --base05: #93a1a1;
+    --base06: #eee8d5;
+    --base07: #fdf6e3;
+    --base08: #dc322f;
+    --base09: #cb4b16;
+    --base0A: #b58900;
+    --base0B: #859900;
+    --base0C: #2aa198;
+    --base0D: #268bd2;
+    --base0E: #6c71c4;
+    --base0F: #d33682;
+}
+
+/* Dracula theme */
+.theme-dracula {
+    --base00: #282936;
+    --base01: #3a3c4e;
+    --base02: #4d4f68;
+    --base03: #626483;
+    --base04: #62d6e8;
+    --base05: #e9e9f4;
+    --base06: #f1f2f8;
+    --base07: #f7f7fb;
+    --base08: #ea51b2;
+    --base09: #b45bcf;
+    --base0A: #00f769;
+    --base0B: #ebff87;
+    --base0C: #a1efe4;
+    --base0D: #62d6e8;
+    --base0E: #b45bcf;
+    --base0F: #00f769;
+}
+
+/* Ayu theme */
+.theme-ayu {
+    --base00: #0f1419;
+    --base01: #131721;
+    --base02: #272d38;
+    --base03: #3e4b59;
+    --base04: #bfbdb6;
+    --base05: #e6e1cf;
+    --base06: #e6e1cf;
+    --base07: #f3f4f5;
+    --base08: #f07178;
+    --base09: #ff8f40;
+    --base0A: #ffb454;
+    --base0B: #b8cc52;
+    --base0C: #95e6cb;
+    --base0D: #59c2ff;
+    --base0E: #d2a6ff;
+    --base0F: #e6b673;
+}
+
+/* Tokyo Night theme */
+.theme-tokyonight {
+    --base00: #1a1b26;
+    --base01: #1f2335;
+    --base02: #2f3549;
+    --base03: #444b6a;
+    --base04: #787c99;
+    --base05: #a9b1d6;
+    --base06: #cbccd1;
+    --base07: #d5d6db;
+    --base08: #f7768e;
+    --base09: #ff9e64;
+    --base0A: #e0af68;
+    --base0B: #9ece6a;
+    --base0C: #2ac3de;
+    --base0D: #7aa2f7;
+    --base0E: #bb9af7;
+    --base0F: #c0caf5;
+}
+
+/* Catppuccin theme */
+.theme-catppuccin {
+    --base00: #1e1e2e;
+    --base01: #181825;
+    --base02: #313244;
+    --base03: #45475a;
+    --base04: #585b70;
+    --base05: #cdd6f4;
+    --base06: #f5e0dc;
+    --base07: #b4befe;
+    --base08: #f38ba8;
+    --base09: #fab387;
+    --base0A: #f9e2af;
+    --base0B: #a6e3a1;
+    --base0C: #94e2d5;
+    --base0D: #89b4fa;
+    --base0E: #cba6f7;
+    --base0F: #f2cdcd;
+}
+
+/* Gruvbox theme */
+.theme-gruvbox {
+    --base00: #282828; /* Dark background */
+    --base01: #3c3836; /* Slightly lighter than base00 */
+    --base02: #504945; /* Selection background */
+    --base03: #665c54; /* Comments, invisibles, line highlighting */
+    --base04: #bdae93; /* Dark foreground (used for status bars) */
+    --base05: #d5c4a1; /* Default foreground, caret, delimiters, operators */
+    --base06: #ebdbb2; /* Light foreground (not often used) */
+    --base07: #fbf1c7; /* Light background (not often used) */
+    --base08: #fb4934; /* Variables, XML tags, markup link text, markup lists, diff deleted */
+    --base09: #fe8019; /* Integers, Boolean, constants, XML attributes, markup link url */
+    --base0A: #fabd2f; /* Classes, markup bold, search text background */
+    --base0B: #b8bb26; /* Strings, inherited class, markup code, diff inserted */
+    --base0C: #8ec07c; /* Support, regular expressions, escape characters, markup quotes */
+    --base0D: #83a598; /* Functions, methods, attribute IDs, headings */
+    --base0E: #d3869b; /* Keywords, storage, selector, markup italic, diff changed */
+    --base0F: #d65d0e; /* Deprecated, opening/closing embedded language tags */
+}
+
+/* Kanagawa theme */
+.theme-kanagawa {
+    --base00: #1F1F28; /* Background */
+    --base01: #2A2A37; /* Lighter background */
+    --base02: #223249; /* Selection background */
+    --base03: #54546D; /* Comments, invisibles, line highlighting */
+    --base04: #727169; /* Dark foreground */
+    --base05: #DCD7BA; /* Default foreground */
+    --base06: #C8C093; /* Light foreground */
+    --base07: #717C7C; /* Light background */
+    --base08: #C34043; /* Red */
+    --base09: #FFA066; /* Orange */
+    --base0A: #C0A36E; /* Yellow */
+    --base0B: #76946A; /* Green */
+    --base0C: #6A9589; /* Aqua/Cyan */
+    --base0D: #7E9CD8; /* Blue */
+    --base0E: #957FB8; /* Purple */
+    --base0F: #D27E99; /* Pink */
+}
+
+/* One Dark theme */
+.theme-onedark {
+    --base00: #282c34; /* Background */
+    --base01: #353b45; /* Lighter background */
+    --base02: #3e4451; /* Selection background */
+    --base03: #545862; /* Comments, invisibles, line highlighting */
+    --base04: #565c64; /* Dark foreground */
+    --base05: #abb2bf; /* Default foreground */
+    --base06: #b6bdca; /* Light foreground */
+    --base07: #c8ccd4; /* Light background */
+    --base08: #e06c75; /* Red */
+    --base09: #d19a66; /* Orange */
+    --base0A: #e5c07b; /* Yellow */
+    --base0B: #98c379; /* Green */
+    --base0C: #56b6c2; /* Aqua/Cyan */
+    --base0D: #61afef; /* Blue */
+    --base0E: #c678dd; /* Purple */
+    --base0F: #be5046; /* Ruby */
+}

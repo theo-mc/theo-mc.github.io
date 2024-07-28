@@ -1,20 +1,66 @@
-<!<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Theo's Resume<</title>
-        <link rel="stylesheet" href="style.css" />
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive CV Terminal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav id="top-nav">
+            <button id="menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1>Interactive CV Terminal</h1>
+        </nav>  
+    </header>
+    
+    <aside id="sidebar">
+        <div id="theme-selector">
+            <label for="theme-select">Theme:</label>
+            <select id="theme-select">
+                <option value="default">Default</option>
+                <option value="tomorrow">Tomorrow</option>
+                <option value="monokai">Monokai</option>
+                <option value="solarized">Solarized</option>
+                <option value="dracula">Dracula</option>
+                <option value="ayu">Ayu</option>
+                <option value="tokyonight">Tokyo Night</option>
+                <option value="catppuccin">Catppuccin</option>
+                <option value="gruvbox">Gruvbox</option>
+                <option value="kanagawa">Kanagawa</option>
+                <option value="onedark">One Dark</option>
+            </select>
+        </div>
+        <ul>
+            <li><a href="#" class="sidebar-item" data-command="whoami"><i class="fas fa-user"></i>About Me</a></li>
+            <li><a href="#" class="sidebar-item" data-command="experience"><i class="fas fa-briefcase"></i>Experience</a></li>
+            <li><a href="#" class="sidebar-item" data-command="education"><i class="fas fa-graduation-cap"></i>Education</a></li>
+            <li><a href="#" class="sidebar-item" data-command="skills"><i class="fas fa-code"></i>Skills</a></li>
+            <li><a href="#" class="sidebar-item" data-command="projects"><i class="fas fa-project-diagram"></i>Projects</a></li>
+            <li><a href="#" class="sidebar-item" data-command="help"><i class="fas fa-question-circle"></i>Help</a></li>
+        </ul>
+    </aside>
 
-    <body>
-        <div class="terminal" id="terminal">
-            <div id="output"></div>
-            <div class="prompt">
-                <input type="text" id="user-input" autofocus />
+    <main id="main-content">
+        <div id="terminal" class="terminal" role="region" aria-label="Interactive CV Terminal">
+            <div class="window-controls">
+                <span class="window-control close"></span>
+                <span class="window-control minimize"></span>
+                <span class="window-control maximize"></span>
+            </div>
+            <div id="terminal-content" class="terminal-content" role="region" aria-label="Interactive CV Terminal">
+                <div id="output" role="log" aria-live="polite"></div>
+                <div class="prompt" role="form">
+                    <label for="user-input" class="sr-only">Enter command</label>
+                    <input type="text" id="user-input" aria-label="Command input" autocomplete="off">
+                </div>
             </div>
         </div>
+    </main>
 
-        <script src="script.js"></script>
-    </body>
+    <script type="module" src="script.js"></script>
+</body>
 </html>
