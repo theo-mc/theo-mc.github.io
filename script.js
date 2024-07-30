@@ -2,66 +2,101 @@ import { cv } from "./cv.js";
 
 class Terminal {
   constructor() {
-	this.terminal = document.getElementById("terminal");
-	this.output = document.getElementById("output");
-	this.userInput = document.getElementById("user-input");
-	this.sidebar = document.getElementById("sidebar");
-	this.themeSelect = document.getElementById("theme-select");
-	this.menuBtn = document.getElementById("menu-btn");
+    this.terminal = document.getElementById("terminal");
+    this.output = document.getElementById("output");
+    this.userInput = document.getElementById("user-input");
+    this.sidebar = document.getElementById("sidebar");
+    this.themeSelect = document.getElementById("theme-select");
+    this.menuBtn = document.getElementById("menu-btn");
+    this.mainContent = document.getElementById("main-content");
 
-	this.commandHistory = [];
-	this.historyIndex = -1;
+    this.commandHistory = [];
+    this.historyIndex = -1;
 
     this.commands = {
-		help: this.helpCommand.bind(this),
-		whoami: this.whoamiCommand.bind(this),
-		experience: this.experienceCommand.bind(this),
-		education: this.educationCommand.bind(this),
-		skills: this.skillsCommand.bind(this),
-		projects: this.projectsCommand.bind(this),
-		clear: this.clearCommand.bind(this),
-		neofetch: this.neofetchCommand.bind(this),
-		ls: this.lsCommand.bind(this),
-		cat: this.catCommand.bind(this),
-		echo: this.echoCommand.bind(this),
-	  };
+      help: this.helpCommand.bind(this),
+      whoami: this.whoamiCommand.bind(this),
+      experience: this.experienceCommand.bind(this),
+      education: this.educationCommand.bind(this),
+      skills: this.skillsCommand.bind(this),
+      projects: this.projectsCommand.bind(this),
+      clear: this.clearCommand.bind(this),
+      neofetch: this.neofetchCommand.bind(this),
+      ls: this.lsCommand.bind(this),
+      cat: this.catCommand.bind(this),
+      echo: this.echoCommand.bind(this),
+    };
 
-	  this.loadCommandHistory();
-	  this.init();
+	this.isSidebarOpen = window.innerWidth > 768;
+    this.loadCommandHistory();
+    this.init();
   }
 
   init() {
-	this.userInput.addEventListener("keydown", this.handleUserInput.bind(this));
-	this.themeSelect.addEventListener("change", this.changeTheme.bind(this));
-	this.menuBtn.addEventListener("click", this.toggleSidebar.bind(this));
-	this.sidebar.querySelectorAll(".sidebar-item").forEach((item) => {
-	  item.addEventListener("click", () =>
-		this.runCommand(item.dataset.command),
-	  );
-	});
+    this.setupEventListeners();
+    this.loadSavedTheme();
+    this.setupSidebarBehavior();
+    this.updateSidebarState();
+  }
 
-	// this.addToTerminal(
-	//   `Welcome to ${cv.header.name}'s interactive CV! Type 'help' for available commands or use the sidebar for navigation.`,
-	// );
-	
-	// this.addToTerminal(this.helpCommand());
+  setupEventListeners() {
+    this.userInput.addEventListener("keydown", this.handleUserInput.bind(this));
+    this.themeSelect.addEventListener("change", this.changeTheme.bind(this));
+    this.menuBtn.addEventListener("click", this.toggleSidebar.bind(this));
+	window.addEventListener("resize", this.handleResize.bind(this));
+    this.setupSidebarItemListeners();
+  }
 
-	const savedTheme = localStorage.getItem("theme");
-	if (savedTheme) {
-	  this.themeSelect.value = savedTheme;
-	  this.changeTheme();
-	}
+  setupSidebarItemListeners() {
+    this.sidebar.querySelectorAll(".sidebar-item").forEach((item) => {
+      item.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.runCommand(item.getAttribute("data-command"));
+        if (window.innerWidth <= 768) {
+          this.closeSidebar();
+        }
+      });
+    });
+  }
+  
+  setupSidebarBehavior() {
+    document.addEventListener("click", (e) => {
+      if (
+        window.innerWidth <= 768 &&
+        this.isSidebarOpen &&
+        !this.sidebar.contains(e.target) &&
+        e.target !== this.menuBtn
+      ) {
+        this.closeSidebar();
+      }
+    });
+  }
 
-	document.addEventListener("click", (e) => {
-	  if (
-		window.innerWidth <= 768 &&
-		!this.sidebar.contains(e.target) &&
-		e.target !== this.menuBtn
-	  ) {
-		this.sidebar.classList.add("collapsed");
-		document.getElementById("main-content").classList.add("full-width");
-	  }
-	});
+  toggleSidebar() {
+    this.isSidebarOpen ? this.closeSidebar() : this.openSidebar();
+  }
+
+  openSidebar() {
+    this.isSidebarOpen = true;
+    this.updateSidebarState();
+  }
+
+  closeSidebar() {
+    this.isSidebarOpen = false;
+    this.updateSidebarState();
+  }
+
+  updateSidebarState() {
+    this.sidebar.classList.toggle("collapsed", !this.isSidebarOpen);
+    this.mainContent.classList.toggle("full-width", !this.isSidebarOpen);
+  }
+
+  handleResize() {
+    if (window.innerWidth > 768 && !this.isSidebarOpen) {
+      this.openSidebar();
+    } else if (window.innerWidth <= 768 && this.isSidebarOpen) {
+      this.closeSidebar();
+    }
   }
 
   loadCommandHistory() {
@@ -75,47 +110,66 @@ class Terminal {
     localStorage.setItem('commandHistory', JSON.stringify(this.commandHistory.slice(0, 50)));
   }
 
-  changeTheme() {
-	const theme = this.themeSelect.value;
-	document.body.className = theme !== "default" ? `theme-${theme}` : "";
-	localStorage.setItem("theme", theme);
+  loadSavedTheme() {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      this.themeSelect.value = savedTheme;
+      this.changeTheme();
+    }
   }
 
-  toggleSidebar() {
-	this.sidebar.classList.toggle("collapsed");
-	document.getElementById("main-content").classList.toggle("full-width");
+  changeTheme() {
+    const theme = this.themeSelect.value;
+    document.body.className = theme !== "default" ? `theme-${theme}` : "";
+    localStorage.setItem("theme", theme);
   }
 
   handleUserInput(event) {
-	if (event.key === "Enter") {
-	  this.saveCommandHistory();
-	  const cmd = this.userInput.value.trim();
-	  if (cmd) {
-		this.commandHistory.unshift(cmd);
-		this.historyIndex = -1;
-		this.runCommand(cmd);
-		this.userInput.value = "";
-	  }
-	} else if (event.key === "ArrowUp") {
-	  event.preventDefault();
-	  this.navigateHistory(1);
-	} else if (event.key === "ArrowDown") {
-	  event.preventDefault();
-	  this.navigateHistory(-1);
-	} else if (event.key === "Tab") {
-	  event.preventDefault();
-	  this.autocomplete();
-	}
+    if (event.key === "Enter") {
+      this.handleEnterKey();
+    } else if (event.key === "ArrowUp") {
+      this.handleArrowUp(event);
+    } else if (event.key === "ArrowDown") {
+      this.handleArrowDown(event);
+    } else if (event.key === "Tab") {
+      this.handleTabKey(event);
+    }
+  }
+
+  handleEnterKey() {
+    const cmd = this.userInput.value.trim();
+    if (cmd) {
+      this.commandHistory.unshift(cmd);
+      this.historyIndex = -1;
+      this.runCommand(cmd);
+      this.userInput.value = "";
+      this.saveCommandHistory();
+    }
+  }
+
+  handleArrowUp(event) {
+    event.preventDefault();
+    this.navigateHistory(1);
+  }
+
+  handleArrowDown(event) {
+    event.preventDefault();
+    this.navigateHistory(-1);
+  }
+
+  handleTabKey(event) {
+    event.preventDefault();
+    this.autocomplete();
   }
 
   navigateHistory(direction) {
-	if (this.commandHistory.length > 0) {
-	  this.historyIndex = Math.min(
-		Math.max(this.historyIndex + direction, 0),
-		this.commandHistory.length - 1,
-	  );
-	  this.userInput.value = this.commandHistory[this.historyIndex];
-	}
+    if (this.commandHistory.length > 0) {
+      this.historyIndex = Math.min(
+        Math.max(this.historyIndex + direction, 0),
+        this.commandHistory.length - 1
+      );
+      this.userInput.value = this.commandHistory[this.historyIndex];
+    }
   }
 
   autocomplete() {
@@ -142,22 +196,12 @@ class Terminal {
     });
   }
 
-
   runCommand(cmd) {
-	this.addToTerminal(cmd, true);
-	const result = this.processCommand(cmd);
-	this.addToTerminal(result);
-	this.userInput.focus();
+    this.addToTerminal(cmd, true);
+    const result = this.processCommand(cmd);
+    this.addToTerminal(result);
+    this.userInput.focus();
   }
-
-//   processCommand(cmd) {
-// 	const trimmedCmd = cmd.trim().toLowerCase();
-// 	if (this.commands.hasOwnProperty(trimmedCmd)) {
-// 	  return this.commands[trimmedCmd]();
-// 	} else {
-// 	  return `Command not found: ${cmd}. Type 'help' for available commands.`;
-// 	}
-//   }
 
   processCommand(cmd) {
     const [command, ...args] = cmd.trim().toLowerCase().split(' ');
@@ -169,13 +213,14 @@ class Terminal {
   }
 
   addToTerminal(content, isCommand = false) {
-	const div = document.createElement("div");
-	div.innerHTML = isCommand
-	  ? `<div class="prompt command">${content}</div>`
-	  : `<div class="output">${content}</div>`;
-	this.output.appendChild(div);
-	this.terminal.scrollTop = this.terminal.scrollHeight;
+    const div = document.createElement("div");
+    div.innerHTML = isCommand
+      ? `<div class="prompt command">${content}</div>`
+      : `<div class="output">${content}</div>`;
+    this.output.appendChild(div);
+    this.terminal.scrollTop = this.terminal.scrollHeight;
   }
+
 
   helpCommand() {
     return `
@@ -393,6 +438,17 @@ class Terminal {
   clearCommand() {
 	this.output.innerHTML = "";
 	return "";
+  }
+
+  loadCommandHistory() {
+    const savedHistory = localStorage.getItem('commandHistory');
+    if (savedHistory) {
+      this.commandHistory = JSON.parse(savedHistory);
+    }
+  }
+
+  saveCommandHistory() {
+    localStorage.setItem('commandHistory', JSON.stringify(this.commandHistory.slice(0, 50)));
   }
 }
 
