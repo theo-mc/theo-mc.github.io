@@ -59,6 +59,8 @@ body {
     color: var(--base0A);
 }
 
+
+
 #sidebar {
     position: fixed;
     top: 56px;
@@ -67,7 +69,7 @@ body {
     width: 240px;
     background-color: var(--base01);
     overflow-y: auto;
-    z-index: 100;
+    z-index: 1000; /* Increased z-index to appear above main content */
     transition: transform 0.3s ease-in-out;
     box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
 }
@@ -103,14 +105,13 @@ body {
 
 /* Side bar */
 #main-content {
-    margin-left: 240px;
     margin-top: 56px;
     padding: 24px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    transition: margin-left 0.3s ease-in-out;
     overflow: hidden; /* Prevent scrollbar on main content */
+    transition: margin-left 0.3s ease-in-out;
 }
 #main-content.full-width {
     margin-left: 0;

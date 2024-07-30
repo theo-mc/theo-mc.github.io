@@ -27,7 +27,7 @@ class Terminal {
       echo: this.echoCommand.bind(this),
     };
 
-	this.isSidebarOpen = window.innerWidth > 768;
+    this.isSidebarOpen = false;
     this.loadCommandHistory();
     this.init();
   }
@@ -35,15 +35,13 @@ class Terminal {
   init() {
     this.setupEventListeners();
     this.loadSavedTheme();
-    this.setupSidebarBehavior();
-    this.updateSidebarState();
+    this.openSidebar(); // Start with closed sidebar
   }
 
   setupEventListeners() {
     this.userInput.addEventListener("keydown", this.handleUserInput.bind(this));
     this.themeSelect.addEventListener("change", this.changeTheme.bind(this));
     this.menuBtn.addEventListener("click", this.toggleSidebar.bind(this));
-	window.addEventListener("resize", this.handleResize.bind(this));
     this.setupSidebarItemListeners();
   }
 
@@ -51,53 +49,34 @@ class Terminal {
     this.sidebar.querySelectorAll(".sidebar-item").forEach((item) => {
       item.addEventListener("click", (e) => {
         e.preventDefault();
-        this.runCommand(item.getAttribute("data-command"));
-        if (window.innerWidth <= 768) {
-          this.closeSidebar();
+        const command = item.getAttribute("command");
+        if (command) {
+          this.runCommand(command);
         }
       });
     });
   }
-  
-  setupSidebarBehavior() {
-    document.addEventListener("click", (e) => {
-      if (
-        window.innerWidth <= 768 &&
-        this.isSidebarOpen &&
-        !this.sidebar.contains(e.target) &&
-        e.target !== this.menuBtn
-      ) {
-        this.closeSidebar();
-      }
-    });
-  }
 
   toggleSidebar() {
-    this.isSidebarOpen ? this.closeSidebar() : this.openSidebar();
+    if (this.isSidebarOpen) {
+      this.closeSidebar();
+    } else {
+      this.openSidebar();
+    }
   }
 
   openSidebar() {
+    this.sidebar.classList.remove("collapsed");
+    this.mainContent.classList.remove("full-width");
     this.isSidebarOpen = true;
-    this.updateSidebarState();
   }
 
   closeSidebar() {
+    this.sidebar.classList.add("collapsed");
+    this.mainContent.classList.add("full-width");
     this.isSidebarOpen = false;
-    this.updateSidebarState();
   }
 
-  updateSidebarState() {
-    this.sidebar.classList.toggle("collapsed", !this.isSidebarOpen);
-    this.mainContent.classList.toggle("full-width", !this.isSidebarOpen);
-  }
-
-  handleResize() {
-    if (window.innerWidth > 768 && !this.isSidebarOpen) {
-      this.openSidebar();
-    } else if (window.innerWidth <= 768 && this.isSidebarOpen) {
-      this.closeSidebar();
-    }
-  }
 
   loadCommandHistory() {
     const savedHistory = localStorage.getItem('commandHistory');
