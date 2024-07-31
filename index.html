@@ -16,32 +16,59 @@
             <h1>Interactive CV Terminal</h1>
         </nav>  
     </header>
-    
+     
     <aside id="sidebar">
-        <div id="theme-selector">
-            <label for="theme-select">Theme:</label>
-            <select id="theme-select">
-                <option value="default">Default</option>
-                <option value="tomorrow">Tomorrow</option>
-                <option value="monokai">Monokai</option>
-                <option value="solarized">Solarized</option>
-                <option value="dracula">Dracula</option>
-                <option value="ayu">Ayu</option>
-                <option value="tokyonight">Tokyo Night</option>
-                <option value="catppuccin">Catppuccin</option>
-                <option value="gruvbox">Gruvbox</option>
-                <option value="kanagawa">Kanagawa</option>
-                <option value="onedark">One Dark</option>
-            </select>
+        <div class="sidebar-content">
+            <ul>
+                <li><a href="#" class="sidebar-item" command="whoami"><i class="fas fa-user"></i>About Me</a></li>
+                <li><a href="#" class="sidebar-item" command="experience"><i class="fas fa-briefcase"></i>Experience</a></li>
+                <li><a href="#" class="sidebar-item" command="education"><i class="fas fa-graduation-cap"></i>Education</a></li>
+                <li><a href="#" class="sidebar-item" command="skills"><i class="fas fa-code"></i>Skills</a></li>
+                <li><a href="#" class="sidebar-item" command="projects"><i class="fas fa-project-diagram"></i>Projects</a></li>
+                <li><a href="#" class="sidebar-item" command="help"><i class="fas fa-question-circle"></i>Help</a></li>
+            </ul>
+
+            <div id="theme-selector">
+                <label for="theme-select">Theme:</label>
+                <select id="theme-select">
+                    <option value="default">Default</option>
+                    <option value="tomorrow">Tomorrow</option>
+                    <option value="monokai">Monokai</option>
+                    <option value="solarized">Solarized</option>
+                    <option value="dracula">Dracula</option>
+                    <option value="ayu">Ayu</option>
+                    <option value="tokyonight">Tokyo Night</option>
+                    <option value="catppuccin">Catppuccin</option>
+                    <option value="gruvbox">Gruvbox</option>
+                    <option value="kanagawa">Kanagawa</option>
+                    <option value="onedark">One Dark</option>
+                </select>
+            </div>
+
+            <table class="tabletop">
+                <tr>
+                    <td class="base08"></td>
+                    <td class="base09"></td>
+                    <td class="base0A"></td>
+                    <td class="base0B"></td>
+                    <td class="base0C"></td>
+                    <td class="base0D"></td>
+                    <td class="base0E"></td>
+                    <td class="base0F"></td>
+                </tr>
+                <tr>
+                    <td class="base00"></td>
+                    <td class="base01"></td>
+                    <td class="base02"></td>
+                    <td class="base03"></td>
+                    <td class="base04"></td>
+                    <td class="base05"></td>
+                    <td class="base06"></td>
+                    <td class="base07"></td>
+                </tr>
+            </table>
         </div>
-        <ul>
-            <li><a href="#" class="sidebar-item" command="whoami"><i class="fas fa-user"></i>About Me</a></li>
-            <li><a href="#" class="sidebar-item" command="experience"><i class="fas fa-briefcase"></i>Experience</a></li>
-            <li><a href="#" class="sidebar-item" command="education"><i class="fas fa-graduation-cap"></i>Education</a></li>
-            <li><a href="#" class="sidebar-item" command="skills"><i class="fas fa-code"></i>Skills</a></li>
-            <li><a href="#" class="sidebar-item" command="projects"><i class="fas fa-project-diagram"></i>Projects</a></li>
-            <li><a href="#" class="sidebar-item" command="help"><i class="fas fa-question-circle"></i>Help</a></li>
-        </ul>
+
     </aside>
 
     <main id="main-content">
