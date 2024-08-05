@@ -9,6 +9,7 @@ class Terminal {
     this.themeSelect = document.getElementById("theme-select");
     this.menuBtn = document.getElementById("menu-btn");
     this.mainContent = document.getElementById("main-content");
+    this.terminalContent = document.getElementById("terminal-content");
 
     this.commandHistory = [];
     this.historyIndex = -1;
@@ -43,6 +44,8 @@ class Terminal {
     this.themeSelect.addEventListener("change", this.changeTheme.bind(this));
     this.menuBtn.addEventListener("click", this.toggleSidebar.bind(this));
     this.setupSidebarItemListeners();
+    // Add click event listener to the terminal
+    this.terminal.addEventListener("click", this.focusInput.bind(this));
   }
 
   setupSidebarItemListeners() {
@@ -191,13 +194,25 @@ class Terminal {
     }
   }
 
+  // New method to focus on the input
+  focusInput(event) {
+    // Check if the click is not on the input itself to avoid unnecessary focus
+    if (event.target !== this.userInput) {
+      this.userInput.focus();
+    }
+  }
+
+  scrollToBottom() {
+    this.terminalContent.scrollTop = this.terminalContent.scrollHeight;
+  }
+
   addToTerminal(content, isCommand = false) {
     const div = document.createElement("div");
     div.innerHTML = isCommand
       ? `<div class="prompt command">${content}</div>`
       : `<div class="output">${content}</div>`;
     this.output.appendChild(div);
-    this.terminal.scrollTop = this.terminal.scrollHeight;
+    this.scrollToBottom();
   }
 
 
@@ -366,15 +381,17 @@ class Terminal {
   lsCommand() {
 	const sections = Object.keys(cv);
 	return `
-	  <h3>Available CV Sections:</h3>
 	  <ul>
-		${sections.map(section => `<li>${section}</li>`).join('')}
+		${sections.map(section => `<li>${section}.txt</li>`).join('')}
 	  </ul>
 	`;
   }
 
   catCommand(args) {
-	const section = args[0];
+	let section = args[0];
+  if (section.endsWith('.txt')) {
+    section = section.slice(0, -4);
+  }
 	if (!section) {
 	  return "Usage: cat [section]";
 	}
