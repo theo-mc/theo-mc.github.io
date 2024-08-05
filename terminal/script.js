@@ -80,7 +80,6 @@ class Terminal {
     this.isSidebarOpen = false;
   }
 
-
   loadCommandHistory() {
     const savedHistory = localStorage.getItem('commandHistory');
     if (savedHistory) {
@@ -93,11 +92,15 @@ class Terminal {
   }
 
   loadSavedTheme() {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      this.themeSelect.value = savedTheme;
-      this.changeTheme();
+    let savedTheme = localStorage.getItem("theme");
+    
+    if (!savedTheme) {
+      savedTheme = "tokyonight";
+      localStorage.setItem("theme", savedTheme);
     }
+    
+    this.themeSelect.value = savedTheme;
+    this.changeTheme();
   }
 
   changeTheme() {

@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: 'Hermit';
-    src: url('./assets/Hermit-Bold.otf') format('opentype');
+    src: url('../assets/Hermit-Bold.otf') format('opentype');
 }
 
 :root {
