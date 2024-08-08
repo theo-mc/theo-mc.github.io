@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive CV Terminal</title>
+    <title>Interactive Resume Terminal</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -13,7 +13,7 @@
             <button id="menu-btn" aria-label="Toggle menu">
                 <i class="fas fa-bars"></i>
             </button>
-            <h1>Interactive CV Terminal</h1>
+            <h1>Interactive Resume Terminal</h1>
         </nav>  
     </header>
      
@@ -32,7 +32,7 @@
                 <label for="theme-select">Theme:</label>
                 <select id="theme-select">
                     <option value="tokyonight">Tokyo Night</option>
-                    <option value="ayudark">Ayu</option>
+                    <option value="ayudark">Ayu Dark</option>
                     <option value="catppuccin">Catppuccin</option>
                     <option value="gruvbox">Gruvbox</option>
                     <option value="kanagawa">Kanagawa</option>
@@ -71,13 +71,13 @@
     </aside>
 
     <main id="main-content">
-        <div id="terminal" class="terminal" role="region" aria-label="Interactive CV Terminal">
+        <div id="terminal" class="terminal" role="region" aria-label="Interactive Resume Terminal">
             <div class="window-controls">
                 <span class="window-control close"></span>
                 <span class="window-control minimize"></span>
                 <span class="window-control maximize"></span>
             </div>
-            <div id="terminal-content" class="terminal-content" role="region" aria-label="Interactive CV Terminal">
+            <div id="terminal-content" class="terminal-content" role="region" aria-label="Interactive Resume Terminal">
                 <div id="output" role="log" aria-live="polite"></div>
                 <div class="prompt" role="form">
                     <label for="user-input" class="sr-only">Enter command</label>

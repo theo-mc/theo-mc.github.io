@@ -1,4 +1,4 @@
-import { cv } from "./cv.js";
+import { resume } from "./resume.js";
 
 class Terminal {
   constructor() {
@@ -239,7 +239,7 @@ class Terminal {
   }
 
   whoamiCommand() {
-	const { name, contact, personalStatement } = cv.header;
+	const { name, contact, personalStatement } = resume.header;
 	return `
 			<h1>${name}</h1>
 			<p><i class="fas fa-envelope"></i> Email: ${contact.email}</p>
@@ -251,7 +251,7 @@ class Terminal {
   experienceCommand() {
 	return `
 			<h2><i class="fas fa-briefcase"></i> Work Experience</h2>
-			${cv.experience
+			${resume.experience
 			  .map(
 				(job) => `
 				<div class="job">
@@ -270,7 +270,7 @@ class Terminal {
   educationCommand() {
 	return `
 			<h2><i class="fas fa-graduation-cap"></i> Education</h2>
-			${cv.education
+			${resume.education
 			  .map(
 				(edu) => `
 				<div class="education">
@@ -304,7 +304,7 @@ class Terminal {
   }
 
   skillsCommand() {
-	const { technical, soft } = cv.skills;
+	const { technical, soft } = resume.skills;
 
 	setTimeout(() => {
 	  document.querySelectorAll(".progress").forEach((progress) => {
@@ -337,7 +337,7 @@ class Terminal {
   projectsCommand() {
 	return `
 			<h2><i class="fas fa-project-diagram"></i> Projects</h2>
-			${cv.projects
+			${resume.projects
 			  .map(
 				(project) => `
 				<div class="project">
@@ -367,8 +367,8 @@ class Terminal {
     `;
 
     const info = `
-    OS: Interactive CV OS
-    Host: ${cv.header.name}'s Portfolio
+    OS: Interactive Resume OS
+    Host: ${resume.header.name}'s Portfolio
     Kernel: JavaScript ES6+
     Shell: Interactive Terminal
     DE: Web Browser
@@ -382,7 +382,7 @@ class Terminal {
   }
 
   lsCommand() {
-	const sections = Object.keys(cv);
+	const sections = Object.keys(resume);
 	return `
 	  <ul>
 		${sections.map(section => `<li>${section}.txt</li>`).join('')}
@@ -398,8 +398,8 @@ class Terminal {
 	if (!section) {
 	  return "Usage: cat [section]";
 	}
-	if (cv.hasOwnProperty(section)) {
-	  return this.formatSection(section, cv[section]);
+	if (resume.hasOwnProperty(section)) {
+	  return this.formatSection(section, resume[section]);
 	} else {
 	  return `Section not found: ${section}`;
 	}
