@@ -42,3 +42,99 @@ td {
 #center-container {
     background-color: blue;
 }
+
+.text-content {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.square-button {
+    background-color: red;
+    color: #ffffff;
+    border: none;
+    width: 200px;
+    height: 200px;
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.square-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.square-button:hover .code-graphic {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.code-graphic {
+    font-family: "Hermit";
+    /* font-family: "Roboto Mono", monospace; */
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    opacity: 0.7;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.code-graphic span {
+    margin-bottom: 5px;
+}
+
+.code-graphic span:nth-child(1) {
+    color: var(--code-color-1);
+}
+.code-graphic span:nth-child(2) {
+    color: var(--code-color-2);
+    margin-left: 10px;
+}
+.code-graphic span:nth-child(3) {
+    color: var(--code-color-3);
+    margin-left: 10px;
+}
+.code-graphic span:nth-child(4) {
+    color: var(--code-color-1);
+}
+
+.button-text {
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-top: 10px;
+    z-index: 1;
+}
