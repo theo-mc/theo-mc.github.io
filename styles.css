@@ -1,3 +1,23 @@
+/* Define Base16 Ayu Dark color variables */
+:root {
+    --base00: #0f1419; /* Background */
+    --base01: #131721; /* Lighter Background */
+    --base02: #1a1f29; /* Selection Background */
+    --base03: #242936; /* Comments, Invisibles, Line Highlighting */
+    --base04: #5c6773; /* Dark Foreground (Used for status bars) */
+    --base05: #e6e1cf; /* Default Foreground, Caret, Delimiters, Operators */
+    --base06: #f3f4f5; /* Light Foreground (Not often used) */
+    --base07: #ffffff; /* Light Background (Not often used) */
+    --base08: #f07178; /* Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted */
+    --base09: #ff8f40; /* Integers, Boolean, Constants, XML Attributes, Markup Link Url */
+    --base0A: #ffee99; /* Classes, Markup Bold, Search Text Background */
+    --base0B: #c2d94c; /* Strings, Inherited Class, Markup Code, Diff Inserted */
+    --base0C: #95e6cb; /* Support, Regular Expressions, Escape Characters, Markup Quotes */
+    --base0D: #39bae6; /* Functions, Methods, Attribute IDs, Headings */
+    --base0E: #ffaa33; /* Keywords, Storage, Selector, Markup Italic, Diff Changed */
+    --base0F: #e6b673; /* Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?> */
+}
+
 @font-face {
     font-family: "Hermit";
     src: url("./assets/Hermit-Bold.otf") format("opentype");
@@ -8,7 +28,10 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: "Hermit";
     overflow: hidden;
+    background-color: var(--base00);
+    color: var(--base05);
 }
 
 #table-container {
@@ -21,26 +44,25 @@ table {
     height: 100%;
     border-collapse: collapse;
     table-layout: fixed;
-    background-color: #0b0e14;
+    background-color: var(--base00);
 }
 
 td {
-    border: 1px solid black;
+    border: 1px solid var(--base02);
     text-align: center;
     vertical-align: middle;
     font-size: 12px;
 }
 
 .cell {
-    color: #ff8f3f;
+    color: var(--base09);
     font-size: 16px;
-    font-family: "Hermit";
     padding: 0px;
     margin: 0px;
 }
 
 #center-container {
-    background-color: blue;
+    background-color: var(--base01);
 }
 
 .text-content {
@@ -53,6 +75,7 @@ h1 {
     font-weight: 700;
     margin-top: 0;
     margin-bottom: 20px;
+    color: var(--base0A);
 }
 
 p {
@@ -70,12 +93,11 @@ p {
 }
 
 .square-button {
-    background-color: red;
-    color: #ffffff;
+    background-color: var(--base01);
+    color: var(--base05);
     border: none;
     width: 200px;
     height: 200px;
-    font-family: sans-serif;
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
@@ -94,6 +116,7 @@ p {
 .square-button:hover {
     transform: translateY(-5px) scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    background-color: var(--base02);
 }
 
 .square-button:hover .code-graphic {
@@ -103,7 +126,6 @@ p {
 
 .code-graphic {
     font-family: "Hermit";
-    /* font-family: "Roboto Mono", monospace; */
     font-size: 12px;
     display: flex;
     flex-direction: column;
@@ -118,18 +140,18 @@ p {
 }
 
 .code-graphic span:nth-child(1) {
-    color: var(--code-color-1);
+    color: var(--base0D);
 }
 .code-graphic span:nth-child(2) {
-    color: var(--code-color-2);
+    color: var(--base09);
     margin-left: 10px;
 }
 .code-graphic span:nth-child(3) {
-    color: var(--code-color-3);
+    color: var(--base0B);
     margin-left: 10px;
 }
 .code-graphic span:nth-child(4) {
-    color: var(--code-color-1);
+    color: var(--base0D);
 }
 
 .button-text {
@@ -137,4 +159,5 @@ p {
     font-weight: 700;
     margin-top: 10px;
     z-index: 1;
+    color: var(--base05);
 }

@@ -5,8 +5,8 @@ const CELL_LIFETIME = 500;
 const MIN_CELL_SIZE = 25;
 let cellsArray, totalCells, cellsToUpdate;
 
-const CENTER_PERCENT_X = 65;
-const CENTER_PERCENT_Y = 65;
+const CENTER_PERCENT_X = 50;
+const CENTER_PERCENT_Y = 50;
 
 function createTable() {
   const container = document.getElementById("table-container");
