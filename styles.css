@@ -2,19 +2,19 @@
 :root {
     --base00: #0f1419; /* Background */
     --base01: #131721; /* Lighter Background */
-    --base02: #1a1f29; /* Selection Background */
-    --base03: #242936; /* Comments, Invisibles, Line Highlighting */
-    --base04: #5c6773; /* Dark Foreground (Used for status bars) */
+    --base02: #272d38; /* Selection Background */
+    --base03: #3e4b59; /* Comments, Invisibles, Line Highlighting */
+    --base04: #bfbdb6; /* Dark Foreground (Used for status bars) */
     --base05: #e6e1cf; /* Default Foreground, Caret, Delimiters, Operators */
-    --base06: #f3f4f5; /* Light Foreground (Not often used) */
-    --base07: #ffffff; /* Light Background (Not often used) */
+    --base06: #e6e1cf; /* Light Foreground (Not often used) */
+    --base07: #f3f4f5; /* Light Background (Not often used) */
     --base08: #f07178; /* Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted */
     --base09: #ff8f40; /* Integers, Boolean, Constants, XML Attributes, Markup Link Url */
-    --base0A: #ffee99; /* Classes, Markup Bold, Search Text Background */
-    --base0B: #c2d94c; /* Strings, Inherited Class, Markup Code, Diff Inserted */
+    --base0A: #ffb454; /* Classes, Markup Bold, Search Text Background */
+    --base0B: #b8cc52; /* Strings, Inherited Class, Markup Code, Diff Inserted */
     --base0C: #95e6cb; /* Support, Regular Expressions, Escape Characters, Markup Quotes */
-    --base0D: #39bae6; /* Functions, Methods, Attribute IDs, Headings */
-    --base0E: #ffaa33; /* Keywords, Storage, Selector, Markup Italic, Diff Changed */
+    --base0D: #59c2ff; /* Functions, Methods, Attribute IDs, Headings */
+    --base0E: #d2a6ff; /* Keywords, Storage, Selector, Markup Italic, Diff Changed */
     --base0F: #e6b673; /* Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?> */
 }
 
@@ -28,7 +28,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: "Hermit";
+    font-family: "Hermit", sans-serif;
     overflow: hidden;
     background-color: var(--base00);
     color: var(--base05);
@@ -48,7 +48,8 @@ table {
 }
 
 td {
-    border: 1px solid var(--base02);
+    /* border: 1px solid var(--base02); */
+    border: 1px solid black;
     text-align: center;
     vertical-align: middle;
     font-size: 12px;
@@ -62,61 +63,70 @@ td {
 }
 
 #center-container {
-    background-color: var(--base01);
+    background-color: rgba(19, 23, 33, 0.9);
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    overflow: auto;
 }
 
 .text-content {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: 700;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     color: var(--base0A);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
 }
 
 p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+    color: var(--base05);
 }
 
 .button-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
+    gap: 40px;
     width: 100%;
 }
 
 .square-button {
-    background-color: var(--base01);
+    background-color: var(--base02);
     color: var(--base05);
     border: none;
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 25px;
     overflow: hidden;
     position: relative;
 }
 
 .square-button:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    background-color: var(--base02);
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+    background-color: var(--base03);
 }
 
 .square-button:hover .code-graphic {
@@ -125,18 +135,18 @@ p {
 }
 
 .code-graphic {
-    font-family: "Hermit";
-    font-size: 12px;
+    font-family: "Hermit", monospace;
+    font-size: 14px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    opacity: 0.7;
+    opacity: 0.8;
     transform: translateY(10px);
     transition: all 0.3s ease;
 }
 
 .code-graphic span {
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 }
 
 .code-graphic span:nth-child(1) {
@@ -144,20 +154,60 @@ p {
 }
 .code-graphic span:nth-child(2) {
     color: var(--base09);
-    margin-left: 10px;
+    margin-left: 12px;
 }
 .code-graphic span:nth-child(3) {
     color: var(--base0B);
-    margin-left: 10px;
+    margin-left: 12px;
 }
 .code-graphic span:nth-child(4) {
     color: var(--base0D);
 }
 
 .button-text {
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: 700;
-    margin-top: 10px;
+    margin-top: 15px;
     z-index: 1;
     color: var(--base05);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Add a subtle animation to the buttons */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(89, 194, 255, 0.4); /* Updated to use new base0D color */
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(89, 194, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(89, 194, 255, 0);
+    }
+}
+
+.square-button {
+    animation: pulse 2s infinite;
+}
+
+.square-button:hover {
+    animation: none;
+}
+
+/* Improve scrollbar appearance */
+#center-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+#center-container::-webkit-scrollbar-track {
+    background: var(--base01);
+}
+
+#center-container::-webkit-scrollbar-thumb {
+    background-color: var(--base04);
+    border-radius: 4px;
+}
+
+#center-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--base05);
 }
