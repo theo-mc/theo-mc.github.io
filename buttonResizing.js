@@ -1,57 +1,98 @@
+// Layout configurations
+const LAYOUTS = [
+  { cols: 3, rows: 1, name: "horizontal" }, // Three in a row
+  { cols: 2, rows: 2, name: "grid" }, // Two on top, one bottom
+  { cols: 1, rows: 3, name: "vertical" }, // One per row
+];
+
+// Constants for spacing
+const PADDING = 80;
+const GAP = 10;
+
+function getAvailableSpace(container) {
+  return {
+    width: container.clientWidth - PADDING,
+    height: container.clientHeight - PADDING,
+  };
+}
+
+function calculateButtonSizeForLayout(layout, availableSpace) {
+  const { width, height } = availableSpace;
+
+  const buttonWidth = (width - (layout.cols - 1) * GAP) / layout.cols;
+  const buttonHeight = (height - (layout.rows - 1) * GAP) / layout.rows;
+
+  return Math.min(buttonWidth, buttonHeight);
+}
+
+function findBestLayout(availableSpace) {
+  return LAYOUTS.reduce(
+    (best, layout) => {
+      const buttonSize = calculateButtonSizeForLayout(layout, availableSpace);
+
+      if (buttonSize > best.buttonSize) {
+        return { layout, buttonSize };
+      }
+      return best;
+    },
+    { layout: LAYOUTS[0], buttonSize: 0 },
+  );
+}
+
+function applyGridLayout(grid, buttons, buttonSize) {
+  grid.style.gridTemplateColumns = `repeat(2, ${buttonSize}px)`;
+  grid.style.gridTemplateRows = `${buttonSize}px ${buttonSize}px`;
+  grid.style.justifyContent = "center";
+  grid.style.alignContent = "center";
+  grid.style.gap = `${GAP}px`;
+
+  // Center the third button
+  buttons[2].style.gridColumn = "1 / span 2";
+  buttons[2].style.justifySelf = "center";
+}
+
+function applyRegularLayout(grid, layout, buttonSize) {
+  grid.style.gridTemplateColumns = `repeat(${layout.cols}, ${buttonSize}px)`;
+  grid.style.gridTemplateRows = `repeat(${layout.rows}, ${buttonSize}px)`;
+  grid.style.justifyContent = "center";
+  grid.style.alignContent = "center";
+  grid.style.gap = `${GAP}px`;
+}
+
+function setButtonSizes(buttons, buttonSize) {
+  buttons.forEach((button) => {
+    button.style.width = `${buttonSize}px`;
+    button.style.height = `${buttonSize}px`;
+  });
+}
+
+function resetButtonStyles(buttons) {
+  buttons[2].style.gridColumn = "";
+  buttons[2].style.justifySelf = "";
+}
+
 function updateGrid() {
+  // Get DOM elements
   const container = document.querySelector(".button-container");
   const grid = document.getElementById("button-grid-container");
   const buttons = document.querySelectorAll(".square-button");
 
-  // Get available space (accounting for padding)
-  const availableWidth = container.clientWidth - 80;
-  const availableHeight = container.clientHeight - 80;
+  // Calculate available space and find best layout
+  const availableSpace = getAvailableSpace(container);
+  const { layout, buttonSize } = findBestLayout(availableSpace);
 
-  // Try different layouts and calculate resulting button sizes
-  const layouts = [
-    { cols: 3, rows: 1 }, // Three in a row
-    { cols: 2, rows: 2 }, // Two on top, one bottom
-    { cols: 1, rows: 3 }, // One per row
-  ];
+  // Set consistent button sizes
+  setButtonSizes(buttons, buttonSize);
 
-  let maxButtonSize = 0;
-  let bestLayout = layouts[0];
-
-  layouts.forEach((layout) => {
-    const buttonWidthForLayout =
-      (availableWidth - (layout.cols - 1) * 10) / layout.cols;
-    const buttonHeightForLayout =
-      (availableHeight - (layout.rows - 1) * 10) / layout.rows;
-    const buttonSize = Math.min(buttonWidthForLayout, buttonHeightForLayout);
-
-    if (buttonSize > maxButtonSize) {
-      maxButtonSize = buttonSize;
-      bestLayout = layout;
-    }
-  });
-
-  // Apply the best layout
-  if (bestLayout.cols === 2 && bestLayout.rows === 2) {
-    // Special handling for 2x2 layout with centered bottom button
-    grid.style.gridTemplateColumns = `repeat(2, ${maxButtonSize}px)`;
-    grid.style.gridTemplateRows = `${maxButtonSize}px ${maxButtonSize}px`;
-    grid.style.justifyContent = "center";
-    grid.style.alignContent = "center";
-
-    // Style for the third button to center it
-    buttons[2].style.marginLeft = `${(maxButtonSize + 10) / 2}px`; // Half of button size plus half of gap
+  // Apply appropriate layout
+  if (layout.name === "grid") {
+    applyGridLayout(grid, buttons, buttonSize);
   } else {
-    // Regular layout
-    grid.style.gridTemplateColumns = `repeat(${bestLayout.cols}, ${maxButtonSize}px)`;
-    grid.style.gridTemplateRows = `repeat(${bestLayout.rows}, ${maxButtonSize}px)`;
-    grid.style.justifyContent = "center";
-    grid.style.alignContent = "center";
-
-    // Reset any special styling
-    buttons[2].style.marginLeft = "";
+    applyRegularLayout(grid, layout, buttonSize);
+    resetButtonStyles(buttons);
   }
 }
 
-// Run on load and resize
-updateGrid();
+// Initialize and set up event listeners
 window.addEventListener("resize", updateGrid);
+updateGrid();
