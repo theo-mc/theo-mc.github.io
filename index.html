@@ -9,48 +9,17 @@
     <body>
         <div id="table-container"></div>
 
-        <div id="center-content" style="display: none">
-            <div class="text-content">
-                <h1>Theo's Portfolio</h1>
-                <p>
-                    Welcome to my digital playground. Explore my projects and
-                    get in touch!
-                </p>
-            </div>
-
+        <div id="center-container" style="display: none">
             <div class="button-container">
-                <button id="projects-btn" class="square-button">
-                    <div class="code-graphic">
-                        <span>&lt;projects&gt;</span>
-                        <span>code();</span>
-                        <span>design();</span>
-                        <span>&lt;/projects&gt;</span>
-                    </div>
-                    <span class="button-text">View Projects</span>
-                </button>
-
-                <button id="about-btn" class="square-button">
-                    <div class="code-graphic">
-                        <span>class About {</span>
-                        <span> skills();</span>
-                        <span> experience();</span>
-                        <span>}</span>
-                    </div>
-                    <span class="button-text">About Me</span>
-                </button>
-
-                <button id="contact-btn" class="square-button">
-                    <div class="code-graphic">
-                        <span>function contact() {</span>
-                        <span> email();</span>
-                        <span> connect();</span>
-                        <span>}</span>
-                    </div>
-                    <span class="button-text">Contact Me</span>
-                </button>
+                <div id="button-grid-container">
+                    <button class="square-button">1</button>
+                    <button class="square-button">2</button>
+                    <button class="square-button">3</button>
+                </div>
             </div>
         </div>
 
-        <script src="script.js"></script>
+        <script src="gridAnimation.js"></script>
+        <script src="buttonResizing.js"></script>
     </body>
 </html>

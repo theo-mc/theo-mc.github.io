@@ -64,8 +64,8 @@ function mergeCenterCells(table, percentX, percentY) {
   mergedCell.rowSpan = mergeRows;
   mergedCell.colSpan = mergeCols;
   mergedCell.classList.remove("cell");
-  mergedCell.id = "center-container";
-  const contentToMerge = document.getElementById("center-content");
+  mergedCell.id = "center-content";
+  const contentToMerge = document.getElementById("center-container");
   mergedCell.innerHTML = contentToMerge.innerHTML;
 }
 

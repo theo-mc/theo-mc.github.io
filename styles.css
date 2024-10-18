@@ -62,152 +62,54 @@ td {
     margin: 0px;
 }
 
-#center-container {
+#center-content {
     background-color: rgba(19, 23, 33, 0.9);
+    /* background: red; */
     backdrop-filter: blur(5px);
     border-radius: 20px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-    padding: 40px;
+    /* padding: 10px; */
     overflow: auto;
 }
 
-.text-content {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-top: 0;
-    margin-bottom: 30px;
-    color: var(--base0A);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    letter-spacing: 2px;
-}
-
-p {
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto 20px;
-    line-height: 1.6;
-    color: var(--base05);
-}
-
 .button-container {
+    width: 49.5vw;
+    height: 50vh;
+    /* border: 2px solid var(--base08); */
+    border-radius: 10px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 40px;
-    width: 100%;
-}
-
-.square-button {
-    background-color: var(--base02);
-    color: var(--base05);
-    border: none;
-    width: 220px;
-    height: 220px;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 15px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    padding: 25px;
-    overflow: hidden;
-    position: relative;
+    /* background-color: rgba(30, 30, 30, 0.8); */
+    /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); */
+    padding: 0;
 }
 
-.square-button:hover {
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
-    background-color: var(--base03);
-}
-
-.square-button:hover .code-graphic {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.code-graphic {
-    font-family: "Hermit", monospace;
-    font-size: 14px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    opacity: 0.8;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-}
-
-.code-graphic span {
-    margin-bottom: 6px;
-}
-
-.code-graphic span:nth-child(1) {
-    color: var(--base0D);
-}
-.code-graphic span:nth-child(2) {
-    color: var(--base09);
-    margin-left: 12px;
-}
-.code-graphic span:nth-child(3) {
-    color: var(--base0B);
-    margin-left: 12px;
-}
-.code-graphic span:nth-child(4) {
-    color: var(--base0D);
-}
-
-.button-text {
-    font-size: 1.3em;
-    font-weight: 700;
-    margin-top: 15px;
-    z-index: 1;
-    color: var(--base05);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-/* Add a subtle animation to the buttons */
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(89, 194, 255, 0.4); /* Updated to use new base0D color */
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(89, 194, 255, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(89, 194, 255, 0);
-    }
+#button-grid-container {
+    width: 100%; /* Full width of the button-container */
+    height: 100%; /* Full height of the button-container */
+    display: grid; /* Use grid layout */
+    gap: 15px; /* Spacing between buttons */
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
 }
 
 .square-button {
-    animation: pulse 2s infinite;
+    background-color: var(--base01); /* Button background color */
+    border: 2px solid var(--base09); /* Button border color */
+    border-radius: 5px; /* Rounded corners */
+    padding: 20px; /* Padding for button size */
+    font-size: 24px; /* Font size for better visibility */
+    color: var(--base05); /* Text color */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition:
+        background-color 0.3s,
+        transform 0.3s; /* Smooth transitions */
+    display: flex; /* Flex display for button */
+    justify-content: center; /* Center text horizontally */
+    align-items: center; /* Center text vertically */
 }
 
 .square-button:hover {
-    animation: none;
-}
-
-/* Improve scrollbar appearance */
-#center-container::-webkit-scrollbar {
-    width: 8px;
-}
-
-#center-container::-webkit-scrollbar-track {
-    background: var(--base01);
-}
-
-#center-container::-webkit-scrollbar-thumb {
-    background-color: var(--base04);
-    border-radius: 4px;
-}
-
-#center-container::-webkit-scrollbar-thumb:hover {
-    background-color: var(--base05);
+    background-color: var(--base08); /* Hover background color */
+    transform: scale(1.05); /* Scale effect on hover */
 }
