@@ -6,13 +6,13 @@ const LAYOUTS = [
 ];
 
 // Constants for spacing
-const PADDING = 25;
-const GAP = 10;
+const PADDING = 40;
+const GAP = 15;
 
 function getAvailableSpace(container) {
   return {
     width: container.clientWidth - PADDING,
-    height: container.clientHeight, // ignore padding on height
+    height: container.clientHeight - PADDING, // ignore padding on height
   };
 }
 

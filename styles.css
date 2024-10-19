@@ -62,26 +62,33 @@ td {
 }
 
 #center-cell {
-    background-color: rgba(19, 23, 33, 0.9);
-    backdrop-filter: blur(5px);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    background: rgba(19, 23, 33, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     border-radius: 20px;
+    /* border: 5px solid rgba(255, 255, 255, 0.1); */
+    padding: 4px 4px;
 }
 
 #center-content {
     height: 60vh;
+    /* background-color: green; */
+    border-radius: 18px;
+    border: 1px solid black;
 }
 
 #button-container {
     height: 75%;
     border: 1 solid black;
     border-radius: 10px;
+    /* background-color: green; */
 }
 
 #text-container {
     height: 25%;
     border: 1 solid black;
     border-radius: 10px;
+    /* background-color: yellow; */
 }
 
 #button-grid-container {
@@ -91,36 +98,51 @@ td {
 }
 
 .square-button {
-    background-color: var(--base01); /* Button background color */
-    border: 2px solid var(--base09); /* Button border color */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 24px; /* Font size for better visibility */
-    color: var(--base05); /* Text color */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition:
-        background-color 0.3s,
-        transform 0.3s; /* Smooth transitions */
+    background: var(--base01);
+    border: 2px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.square-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 4px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--base09), var(--base0D));
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
 }
 
 .square-button:hover {
-    background-color: var(--base08); /* Hover background color */
-    transform: scale(1.05); /* Scale effect on hover */
+    transform: translateY(-2px);
+    background: var(--base02);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .button-content {
     width: 100%;
     height: 100%;
-    /* padding: 25px; */
-    /* margin: 25px; */
     display: flex;
-    flex-direction: column; /* Stack children vertically */
+    flex-direction: column;
 }
 
 .image-container {
     width: 100%;
     height: 70%;
-    /* background-color: green; */
-    /* Add these new properties */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,54 +152,49 @@ td {
 .text-container {
     width: 100%;
     height: 30%;
-    /* background-color: yellow; */
 }
 
 .image-container img {
     width: 80%;
     height: 80%;
-    /* object-fit: cover; */
     object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.square-button:hover .image-container img {
+    transform: scale(1.05);
 }
 
 .text-container p {
-    /* Calculate font size based on container width */
     font-size: clamp(16px, 2.5vw, 32px);
-    /* Ensure text doesn't overflow */
     margin: 0;
     padding: 0.5em;
-    /* Ensure text stays centered and contained */
     width: 100%;
     box-sizing: border-box;
-    /* Center text */
     text-align: center;
-    /* Prevent text from wrapping if possible */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 #text-container h1 {
-    /* Scale heading with container, keeping reasonable bounds */
     font-size: clamp(24px, 4vw, 48px);
     margin: 0;
     padding: 0.3em;
-    /* Center text */
     text-align: center;
-    /* Handle overflow */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    background: linear-gradient(120deg, var(--base09), var(--base0D));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #text-container p {
-    /* Scale paragraph text with container */
     font-size: clamp(16px, 2vw, 24px);
     margin: 0;
     padding: 0.5em;
-    /* Center text */
     text-align: center;
-    /* Handle overflow */
     overflow: hidden;
     text-overflow: ellipsis;
 }
