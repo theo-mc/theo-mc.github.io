@@ -5,8 +5,8 @@ const CELL_LIFETIME = 500;
 const MIN_CELL_SIZE = 25;
 let cellsArray, totalCells, cellsToUpdate;
 
-const CENTER_PERCENT_X = 50;
-const CENTER_PERCENT_Y = 50;
+const CENTER_PERCENT_X = 60;
+const CENTER_PERCENT_Y = 60;
 
 function createTable() {
   const container = document.getElementById("table-container");
@@ -64,8 +64,8 @@ function mergeCenterCells(table, percentX, percentY) {
   mergedCell.rowSpan = mergeRows;
   mergedCell.colSpan = mergeCols;
   mergedCell.classList.remove("cell");
-  mergedCell.id = "center-content";
-  const contentToMerge = document.getElementById("center-container");
+  mergedCell.id = "center-cell";
+  const contentToMerge = document.getElementById("container");
   mergedCell.innerHTML = contentToMerge.innerHTML;
 }
 

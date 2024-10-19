@@ -48,7 +48,6 @@ table {
 }
 
 td {
-    /* border: 1px solid var(--base02); */
     border: 1px solid black;
     text-align: center;
     vertical-align: middle;
@@ -62,54 +61,123 @@ td {
     margin: 0px;
 }
 
-#center-content {
+#center-cell {
     background-color: rgba(19, 23, 33, 0.9);
-    /* background: red; */
     backdrop-filter: blur(5px);
-    border-radius: 20px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-    /* padding: 10px; */
-    overflow: auto;
+    border-radius: 20px;
 }
 
-.button-container {
-    width: 49.5vw;
-    height: 50vh;
-    /* border: 2px solid var(--base08); */
+#center-content {
+    height: 60vh;
+}
+
+#button-container {
+    height: 75%;
+    border: 1 solid black;
     border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* background-color: rgba(30, 30, 30, 0.8); */
-    /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); */
-    padding: 0;
+}
+
+#text-container {
+    height: 25%;
+    border: 1 solid black;
+    border-radius: 10px;
 }
 
 #button-grid-container {
-    width: 100%; /* Full width of the button-container */
-    height: 100%; /* Full height of the button-container */
-    display: grid; /* Use grid layout */
-    gap: 15px; /* Spacing between buttons */
-    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    width: 100%;
+    height: 100%;
+    display: grid;
 }
 
 .square-button {
     background-color: var(--base01); /* Button background color */
     border: 2px solid var(--base09); /* Button border color */
     border-radius: 5px; /* Rounded corners */
-    padding: 20px; /* Padding for button size */
     font-size: 24px; /* Font size for better visibility */
     color: var(--base05); /* Text color */
     cursor: pointer; /* Pointer cursor on hover */
     transition:
         background-color 0.3s,
         transform 0.3s; /* Smooth transitions */
-    display: flex; /* Flex display for button */
-    justify-content: center; /* Center text horizontally */
-    align-items: center; /* Center text vertically */
 }
 
 .square-button:hover {
     background-color: var(--base08); /* Hover background color */
     transform: scale(1.05); /* Scale effect on hover */
+}
+
+.button-content {
+    width: 100%;
+    height: 100%;
+    /* padding: 25px; */
+    /* margin: 25px; */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+}
+
+.image-container {
+    width: 100%;
+    height: 70%;
+    /* background-color: green; */
+    /* Add these new properties */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.text-container {
+    width: 100%;
+    height: 30%;
+    /* background-color: yellow; */
+}
+
+.image-container img {
+    width: 80%;
+    height: 80%;
+    /* object-fit: cover; */
+    object-fit: contain;
+}
+
+.text-container p {
+    /* Calculate font size based on container width */
+    font-size: clamp(16px, 2.5vw, 32px);
+    /* Ensure text doesn't overflow */
+    margin: 0;
+    padding: 0.5em;
+    /* Ensure text stays centered and contained */
+    width: 100%;
+    box-sizing: border-box;
+    /* Center text */
+    text-align: center;
+    /* Prevent text from wrapping if possible */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#text-container h1 {
+    /* Scale heading with container, keeping reasonable bounds */
+    font-size: clamp(24px, 4vw, 48px);
+    margin: 0;
+    padding: 0.3em;
+    /* Center text */
+    text-align: center;
+    /* Handle overflow */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#text-container p {
+    /* Scale paragraph text with container */
+    font-size: clamp(16px, 2vw, 24px);
+    margin: 0;
+    padding: 0.5em;
+    /* Center text */
+    text-align: center;
+    /* Handle overflow */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

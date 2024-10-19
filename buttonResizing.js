@@ -6,13 +6,13 @@ const LAYOUTS = [
 ];
 
 // Constants for spacing
-const PADDING = 80;
+const PADDING = 25;
 const GAP = 10;
 
 function getAvailableSpace(container) {
   return {
     width: container.clientWidth - PADDING,
-    height: container.clientHeight - PADDING,
+    height: container.clientHeight, // ignore padding on height
   };
 }
 
@@ -73,7 +73,7 @@ function resetButtonStyles(buttons) {
 
 function updateGrid() {
   // Get DOM elements
-  const container = document.querySelector(".button-container");
+  const container = document.getElementById("button-container");
   const grid = document.getElementById("button-grid-container");
   const buttons = document.querySelectorAll(".square-button");
 
