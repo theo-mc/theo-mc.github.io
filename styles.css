@@ -99,7 +99,7 @@ td {
 .square-button {
     background: var(--base01);
     border: 2px solid transparent;
-    border-radius: 5px;
+    border-radius: 15px; /* Increased from 5px */
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -113,7 +113,7 @@ td {
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 4px;
+    border-radius: 13px; /* Increased from 4px - slightly less than parent to maintain gradient border effect */
     padding: 2px;
     background: linear-gradient(135deg, var(--base09), var(--base0D));
     -webkit-mask:
