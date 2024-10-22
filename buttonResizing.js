@@ -5,9 +5,25 @@ const LAYOUTS = [
   { cols: 1, rows: 3, name: "vertical" }, // One per row
 ];
 
-// Constants for spacing
-const PADDING = 40;
-const GAP = 15;
+// Function to get responsive padding
+function getPadding() {
+  const width = window.innerWidth;
+  if (width <= 400) return 5;
+  if (width <= 800) return 25;
+  return 40;
+}
+
+// Function to get responsive gap
+function getGap() {
+  const width = window.innerWidth;
+  if (width <= 400) return 5;
+  if (width <= 800) return 10;
+  return 15;
+}
+
+// Initialize padding and gap
+let PADDING = getPadding();
+let GAP = getGap();
 
 function getAvailableSpace(container) {
   return {
@@ -19,6 +35,7 @@ function getAvailableSpace(container) {
 function calculateButtonSizeForLayout(layout, availableSpace) {
   const { width, height } = availableSpace;
 
+  // Use current GAP value for calculations
   const buttonWidth = (width - (layout.cols - 1) * GAP) / layout.cols;
   const buttonHeight = (height - (layout.rows - 1) * GAP) / layout.rows;
 
@@ -72,6 +89,10 @@ function resetButtonStyles(buttons) {
 }
 
 function updateGrid() {
+  // Update padding and gap based on current window width
+  PADDING = getPadding();
+  GAP = getGap();
+
   // Get DOM elements
   const container = document.getElementById("button-container");
   const grid = document.getElementById("button-grid-container");

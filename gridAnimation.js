@@ -1,11 +1,19 @@
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 const UPDATE_CELLS_PERCENT = 0.1;
-const UPDATE_INTERVAL = 100;
-const CELL_LIFETIME = 500;
+const UPDATE_INTERVAL = 200;
+const CELL_LIFETIME = 1000;
 const MIN_CELL_SIZE = 25;
 let cellsArray, totalCells, cellsToUpdate;
 
-const CENTER_PERCENT_X = 60;
+// Make CENTER_PERCENT_X responsive based on screen width
+function getCenterPercentX() {
+  const width = window.innerWidth;
+  if (width <= 400) return 100;
+  if (width <= 800) return 80;
+  return 60;
+}
+
+let CENTER_PERCENT_X = getCenterPercentX();
 const CENTER_PERCENT_Y = 60;
 
 function createTable() {
@@ -34,6 +42,8 @@ function createTable() {
   container.innerHTML = "";
   container.appendChild(table);
 
+  // Update CENTER_PERCENT_X before merging cells
+  CENTER_PERCENT_X = getCenterPercentX();
   mergeCenterCells(table, CENTER_PERCENT_X, CENTER_PERCENT_Y);
 
   cellsArray = Array.from(document.getElementsByClassName("cell"));
@@ -89,7 +99,6 @@ function animateGrid() {
 createTable();
 
 window.addEventListener("resize", () => {
-  console.log("10");
   createTable();
 });
 
