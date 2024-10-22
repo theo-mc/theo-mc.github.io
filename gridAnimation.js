@@ -1,9 +1,11 @@
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-const UPDATE_CELLS_PERCENT = 0.1;
+const UPDATE_CELLS_PERCENT = 0.075;
 const UPDATE_INTERVAL = 200;
 const CELL_LIFETIME = 1000;
 const MIN_CELL_SIZE = 25;
+const CELL_COOLDOWN = CELL_LIFETIME * 2; // Minimum time (in ms) between cell updates
 let cellsArray, totalCells, cellsToUpdate;
+let cellLastUpdated = new Map(); // Track when each cell was last updated
 
 // Make CENTER_PERCENT_X responsive based on screen width
 function getCenterPercentX() {
@@ -49,6 +51,9 @@ function createTable() {
   cellsArray = Array.from(document.getElementsByClassName("cell"));
   totalCells = cellsArray.length;
   cellsToUpdate = Math.floor(totalCells * UPDATE_CELLS_PERCENT);
+
+  // Reset the cellLastUpdated Map when creating a new table
+  cellLastUpdated.clear();
 }
 
 function mergeCenterCells(table, percentX, percentY) {
@@ -79,14 +84,29 @@ function mergeCenterCells(table, percentX, percentY) {
   mergedCell.innerHTML = contentToMerge.innerHTML;
 }
 
+function canUpdateCell(cell) {
+  const lastUpdate = cellLastUpdated.get(cell);
+  const currentTime = Date.now();
+  return !lastUpdate || currentTime - lastUpdate >= CELL_COOLDOWN;
+}
+
 function animateGrid() {
   const updatedCells = new Set();
-  for (let i = 0; i < cellsToUpdate; i++) {
+  let attempts = 0;
+  const maxAttempts = totalCells; // Prevent infinite loop
+
+  while (updatedCells.size < cellsToUpdate && attempts < maxAttempts) {
     const index = Math.floor(Math.random() * totalCells);
     const cell = cellsArray[index];
-    cell.textContent = letters[Math.floor(Math.random() * letters.length)];
-    cell.style.opacity = "1";
-    updatedCells.add(cell);
+
+    if (canUpdateCell(cell) && !updatedCells.has(cell)) {
+      cell.textContent = letters[Math.floor(Math.random() * letters.length)];
+      cell.style.opacity = "1";
+      updatedCells.add(cell);
+      cellLastUpdated.set(cell, Date.now());
+    }
+
+    attempts++;
   }
 
   setTimeout(() => {
