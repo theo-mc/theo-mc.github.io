@@ -1,21 +1,18 @@
-/* Define Base16 Ayu Dark color variables */
+/* Modern color scheme and effects */
 :root {
-    --base00: #0f1419; /* Background */
-    --base01: #131721; /* Lighter Background */
-    --base02: #272d38; /* Selection Background */
-    --base03: #3e4b59; /* Comments, Invisibles, Line Highlighting */
-    --base04: #bfbdb6; /* Dark Foreground (Used for status bars) */
-    --base05: #e6e1cf; /* Default Foreground, Caret, Delimiters, Operators */
-    --base06: #e6e1cf; /* Light Foreground (Not often used) */
-    --base07: #f3f4f5; /* Light Background (Not often used) */
-    --base08: #f07178; /* Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted */
-    --base09: #ff8f40; /* Integers, Boolean, Constants, XML Attributes, Markup Link Url */
-    --base0A: #ffb454; /* Classes, Markup Bold, Search Text Background */
-    --base0B: #b8cc52; /* Strings, Inherited Class, Markup Code, Diff Inserted */
-    --base0C: #95e6cb; /* Support, Regular Expressions, Escape Characters, Markup Quotes */
-    --base0D: #59c2ff; /* Functions, Methods, Attribute IDs, Headings */
-    --base0E: #d2a6ff; /* Keywords, Storage, Selector, Markup Italic, Diff Changed */
-    --base0F: #e6b673; /* Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?> */
+    --bg: #0f172a;
+    --bg-secondary: #1e293b;
+    --primary: #3b82f6;
+    --primary-light: #60a5fa;
+    --text: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --accent: #0ea5e9;
+    --border: #334155;
+    --card: #1e293b;
+    --success: #22c55e;
+    --gradient-1: linear-gradient(135deg, #3b82f6 0%, #0ea5e9 100%);
+    --gradient-2: linear-gradient(135deg, #60a5fa 0%, #0284c7 100%);
+    --glass-bg: rgba(30, 41, 59, 0.7);
 }
 
 @font-face {
@@ -30,8 +27,33 @@ body {
     padding: 0;
     font-family: "Hermit", sans-serif;
     overflow: hidden;
-    background-color: var(--base00);
-    color: var(--base05);
+    background-color: var(--bg);
+    color: var(--text);
+    background-image: radial-gradient(
+            circle at 10% 20%,
+            rgba(59, 130, 246, 0.15) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(14, 165, 233, 0.15) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(14, 165, 233, 0.1) 0%,
+            transparent 70%
+        );
+    /* animation: backgroundShift 15s ease-in-out infinite alternate; */
+}
+
+@keyframes backgroundShift {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
 }
 
 #table-container {
@@ -44,40 +66,57 @@ table {
     height: 100%;
     border-collapse: collapse;
     table-layout: fixed;
-    background-color: var(--base00);
+    background-color: transparent;
 }
 
 td {
-    border: 1px solid black;
+    border: 1px solid rgba(51, 65, 85, 0.3);
     text-align: center;
     vertical-align: middle;
     font-size: 12px;
+    transition: border-color 0.3s ease;
 }
 
 .cell {
-    color: var(--base09);
+    color: var(--primary-light);
     font-size: 16px;
     padding: 0px;
     margin: 0px;
     transform: translateZ(0);
-    transition: opacity 0.4s linear;
-    will-change: opacity;
+    transition: all 0.4s ease;
+    will-change: opacity, transform;
+    text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
 }
 
 #center-cell {
-    background: rgba(19, 23, 33, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    border-radius: 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    border-radius: 24px;
     padding: 4px 4px;
+    /* animation: floatCell 6s ease-in-out infinite; */
+}
+
+@keyframes floatCell {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 #center-content {
     height: 60vh;
-    border-radius: 18px;
-    border: 1px solid black;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
+    background: rgba(15, 23, 42, 0.3);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
 }
 
 #text-container {
@@ -97,14 +136,15 @@ td {
     height: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
 .square-button {
-    background: var(--base01);
+    background: var(--glass-bg);
     border: 2px solid transparent;
-    border-radius: 15px; /* Increased from 5px */
+    border-radius: 20px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
 }
@@ -116,9 +156,9 @@ td {
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 13px; /* Increased from 4px - slightly less than parent to maintain gradient border effect */
+    border-radius: 18px;
     padding: 2px;
-    background: linear-gradient(135deg, var(--base09), var(--base0D));
+    background: var(--gradient-1);
     -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
@@ -127,12 +167,40 @@ td {
         linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.square-button::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.1) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .square-button:hover {
-    transform: translateY(-2px);
-    background: var(--base02);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px) scale(1.02);
+    background: rgba(59, 130, 246, 0.15);
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.square-button:hover::before {
+    opacity: 1;
+}
+
+.square-button:hover::after {
+    opacity: 1;
 }
 
 .button-content {
@@ -140,6 +208,8 @@ td {
     height: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 1;
 }
 
 .image-container {
@@ -149,6 +219,7 @@ td {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    padding: 1rem;
 }
 
 .text-container {
@@ -160,11 +231,13 @@ td {
     width: 80%;
     height: 80%;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    transition: all 0.4s ease;
+    filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.2));
 }
 
 .square-button:hover .image-container img {
-    transform: scale(1.05);
+    transform: scale(1.1) translateY(-5px);
+    filter: drop-shadow(0 5px 15px rgba(96, 165, 250, 0.4));
 }
 
 .text-container p {
@@ -177,23 +250,59 @@ td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--text);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: color 0.3s ease;
+}
+
+.square-button:hover .text-container p {
+    color: var(--primary-light);
 }
 
 #text-container h1 {
-    font-size: clamp(20px, 4vh, 48px);
+    font-size: clamp(24px, 4vh, 48px);
     line-height: 1.2;
     margin: 0;
     padding: 0;
     text-align: center;
-    background: linear-gradient(120deg, var(--base09), var(--base0D));
+    background: var(--gradient-2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+    /* animation: gradientShift 8s ease infinite; */
+}
+
+@keyframes gradientShift {
+    0%,
+    100% {
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        filter: hue-rotate(15deg);
+    }
 }
 
 #text-container p {
     font-size: clamp(14px, 2vh, 24px);
     line-height: 1.3;
-    margin: 0.5vh 0 0 0;
+    margin: 1vh 0 0 0;
     padding: 0;
     text-align: center;
+    color: var(--text-secondary);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* .cell {
+    animation: fadeInCell 0.5s ease backwards;
+} */
+
+@keyframes fadeInCell {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
