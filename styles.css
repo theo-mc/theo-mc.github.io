@@ -1,20 +1,51 @@
-/* Modern color scheme and effects */
+/* ==========================================================================
+   CSS Variables - Color System
+   ========================================================================== */
 :root {
-    --bg: #0f172a;
-    --bg-secondary: #1e293b;
-    --primary: #3b82f6;
-    --primary-light: #60a5fa;
-    --text: #f1f5f9;
-    --text-secondary: #94a3b8;
-    --accent: #0ea5e9;
-    --border: #334155;
-    --card: #1e293b;
-    --success: #22c55e;
-    --gradient-1: linear-gradient(135deg, #3b82f6 0%, #0ea5e9 100%);
-    --gradient-2: linear-gradient(135deg, #60a5fa 0%, #0284c7 100%);
-    --glass-bg: rgba(30, 41, 59, 0.7);
+    /* Base Colors */
+    --color-navy-900: #0f172a; /* Main background */
+    --color-navy-800: #1e293b; /* Secondary background */
+    --color-navy-700: #334155; /* Border color */
+
+    /* Primary Colors */
+    --color-blue-600: #3b82f6; /* Primary blue */
+    --color-blue-500: #60a5fa; /* Light blue */
+    --color-sky-500: #0ea5e9; /* Accent blue */
+    --color-sky-600: #0284c7; /* Dark accent blue */
+
+    /* Text Colors */
+    --color-slate-100: #f1f5f9; /* Primary text */
+    --color-slate-400: #94a3b8; /* Secondary text */
+
+    /* Functional Colors */
+    --color-success: #22c55e; /* Success state */
+
+    /* Semantic Variables */
+    --background-primary: var(--color-navy-900);
+    --background-secondary: var(--color-navy-800);
+    --background-glass: rgba(30, 41, 59, 0.7);
+
+    --text-primary: var(--color-slate-100);
+    --text-secondary: var(--color-slate-400);
+
+    --border-color: var(--color-navy-700);
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(
+        135deg,
+        var(--color-blue-600) 0%,
+        var(--color-sky-500) 100%
+    );
+    --gradient-secondary: linear-gradient(
+        135deg,
+        var(--color-blue-500) 0%,
+        var(--color-sky-600) 100%
+    );
 }
 
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
 @font-face {
     font-family: "Hermit";
     src: url("./assets/Hermit-Bold.otf") format("opentype");
@@ -27,8 +58,8 @@ body {
     padding: 0;
     font-family: "Hermit", sans-serif;
     overflow: hidden;
-    background-color: var(--bg);
-    color: var(--text);
+    background-color: var(--background-primary);
+    color: var(--text-primary);
     background-image: radial-gradient(
             circle at 10% 20%,
             rgba(59, 130, 246, 0.15) 0%,
@@ -44,18 +75,11 @@ body {
             rgba(14, 165, 233, 0.1) 0%,
             transparent 70%
         );
-    /* animation: backgroundShift 15s ease-in-out infinite alternate; */
 }
 
-@keyframes backgroundShift {
-    0% {
-        background-position: 0% 0%;
-    }
-    100% {
-        background-position: 100% 100%;
-    }
-}
-
+/* ==========================================================================
+   Table Styles
+   ========================================================================== */
 #table-container {
     width: 100%;
     height: 100%;
@@ -74,41 +98,34 @@ td {
     text-align: center;
     vertical-align: middle;
     font-size: 12px;
-    transition: border-color 0.3s ease;
 }
 
+/* ==========================================================================
+   Cell Styles
+   ========================================================================== */
 .cell {
-    color: var(--primary-light);
+    color: var(--color-blue-500);
     font-size: 16px;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     transform: translateZ(0);
-    transition: all 0.4s ease;
+    /* transition: all 0.4s ease; */
     will-change: opacity, transform;
-    text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
 }
 
 #center-cell {
-    background: var(--glass-bg);
+    background: var(--background-glass);
     backdrop-filter: blur(16px);
     box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.4),
         0 0 0 1px rgba(255, 255, 255, 0.1) inset;
     border-radius: 24px;
-    padding: 4px 4px;
-    /* animation: floatCell 6s ease-in-out infinite; */
+    padding: 4px;
 }
 
-@keyframes floatCell {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
+/* ==========================================================================
+   Center Content Styles
+   ========================================================================== */
 #center-content {
     height: 60vh;
     border-radius: 22px;
@@ -131,6 +148,9 @@ td {
     height: 75%;
 }
 
+/* ==========================================================================
+   Button Grid Styles
+   ========================================================================== */
 #button-grid-container {
     width: 100%;
     height: 100%;
@@ -140,7 +160,7 @@ td {
 }
 
 .square-button {
-    background: var(--glass-bg);
+    background: var(--background-glass);
     border: 2px solid transparent;
     border-radius: 20px;
     cursor: pointer;
@@ -158,7 +178,7 @@ td {
     bottom: 0;
     border-radius: 18px;
     padding: 2px;
-    background: var(--gradient-1);
+    background: var(--gradient-primary);
     -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
@@ -171,22 +191,6 @@ td {
     transition: opacity 0.3s ease;
 }
 
-.square-button::after {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.1) 0%,
-        transparent 70%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
 .square-button:hover {
     transform: translateY(-5px) scale(1.02);
     background: rgba(59, 130, 246, 0.15);
@@ -195,14 +199,9 @@ td {
         0 0 0 1px rgba(255, 255, 255, 0.1) inset;
 }
 
-.square-button:hover::before {
-    opacity: 1;
-}
-
-.square-button:hover::after {
-    opacity: 1;
-}
-
+/* ==========================================================================
+   Button Content Styles
+   ========================================================================== */
 .button-content {
     width: 100%;
     height: 100%;
@@ -235,11 +234,6 @@ td {
     filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.2));
 }
 
-.square-button:hover .image-container img {
-    transform: scale(1.1) translateY(-5px);
-    filter: drop-shadow(0 5px 15px rgba(96, 165, 250, 0.4));
-}
-
 .text-container p {
     font-size: clamp(16px, 2vw, 32px);
     margin: 0;
@@ -250,36 +244,24 @@ td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--text);
+    color: var(--text-primary);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: color 0.3s ease;
 }
 
-.square-button:hover .text-container p {
-    color: var(--primary-light);
-}
-
+/* ==========================================================================
+   Text Styles
+   ========================================================================== */
 #text-container h1 {
     font-size: clamp(24px, 4vh, 48px);
     line-height: 1.2;
     margin: 0;
     padding: 0;
     text-align: center;
-    background: var(--gradient-2);
+    background: var(--gradient-secondary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
-    /* animation: gradientShift 8s ease infinite; */
-}
-
-@keyframes gradientShift {
-    0%,
-    100% {
-        filter: hue-rotate(0deg);
-    }
-    50% {
-        filter: hue-rotate(15deg);
-    }
 }
 
 #text-container p {
@@ -290,19 +272,4 @@ td {
     text-align: center;
     color: var(--text-secondary);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* .cell {
-    animation: fadeInCell 0.5s ease backwards;
-} */
-
-@keyframes fadeInCell {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
