@@ -47,9 +47,7 @@ class GridState {
   reset() {
     this.cells = Array.from(document.getElementsByClassName("cell"));
     this.totalCells = this.cells.length;
-    this.cellsToUpdate = Math.floor(
-      this.totalCells * CONFIG.UPDATE_CELLS_PERCENT,
-    );
+    this.cellsToUpdate = Math.floor(this.totalCells * CONFIG.UPDATE_CELLS_PERCENT);
     // Clear all existing animation timeouts
     this.activeTimeouts.forEach((timeout) => clearTimeout(timeout));
     this.activeTimeouts.clear();
@@ -96,9 +94,7 @@ function createGrid() {
  */
 function calculateGridDimensions(container) {
   return {
-    columns: Math.floor(
-      container.clientWidth / (CONFIG.MIN_CELL_SIZE_PX * 0.75),
-    ),
+    columns: Math.floor(container.clientWidth / (CONFIG.MIN_CELL_SIZE_PX * 0.75)),
     rows: Math.floor(container.clientHeight / CONFIG.MIN_CELL_SIZE_PX),
   };
 }
@@ -139,10 +135,7 @@ function buildGridTable(columns, rows) {
 function mergeCenterCells(table, percentX, percentY) {
   const dimensions = calculateMergeDimensions(table, percentX, percentY);
   removeMergedCells(table, dimensions);
-  configureMergedCell(
-    table.rows[dimensions.startRow].cells[dimensions.startCol],
-    dimensions,
-  );
+  configureMergedCell(table.rows[dimensions.startRow].cells[dimensions.startCol], dimensions);
 }
 
 /**
@@ -171,16 +164,9 @@ function calculateMergeDimensions(table, percentX, percentY) {
  * @param {HTMLTableElement} table - The grid table element
  * @param {Object} dimensions - Dimensions and position of the merged cell
  */
-function removeMergedCells(
-  table,
-  { startRow, startCol, mergeRows, mergeCols },
-) {
+function removeMergedCells(table, { startRow, startCol, mergeRows, mergeCols }) {
   for (let i = startRow; i < startRow + mergeRows; i++) {
-    for (
-      let j = startCol + (i === startRow ? 1 : 0);
-      j < startCol + mergeCols;
-      j++
-    ) {
+    for (let j = startCol + (i === startRow ? 1 : 0); j < startCol + mergeCols; j++) {
       table.rows[i].deleteCell(startCol);
     }
   }
@@ -204,23 +190,17 @@ function configureMergedCell(cell, { mergeRows, mergeCols }) {
  * Creates a staggered effect by randomizing initial update times
  */
 function populateInitialCells() {
-  const cellsToFill = Math.floor(
-    gridState.totalCells * (CONFIG.INITIAL_FILLED_PERCENT / 100),
-  );
+  const cellsToFill = Math.floor(gridState.totalCells * (CONFIG.INITIAL_FILLED_PERCENT / 100));
   const availableCells = new Set(gridState.cells);
   const currentTime = Date.now();
 
   for (let i = 0; i < cellsToFill && availableCells.size > 0; i++) {
     const cellsArray = Array.from(availableCells);
-    const selectedCell =
-      cellsArray[Math.floor(Math.random() * cellsArray.length)];
+    const selectedCell = cellsArray[Math.floor(Math.random() * cellsArray.length)];
 
     updateCellWithTimeout(selectedCell);
     // Stagger initial update times to prevent synchronized updates
-    gridState.lastUpdated.set(
-      selectedCell,
-      currentTime - Math.random() * CELL_COOLDOWN_MS,
-    );
+    gridState.lastUpdated.set(selectedCell, currentTime - Math.random() * CELL_COOLDOWN_MS);
     availableCells.delete(selectedCell);
   }
 }
@@ -267,19 +247,12 @@ function animateGrid() {
   let attempts = 0;
 
   // Try to update the target number of cells
-  while (
-    updatedCells.size < gridState.cellsToUpdate &&
-    attempts < gridState.totalCells
-  ) {
-    const cell =
-      gridState.cells[Math.floor(Math.random() * gridState.totalCells)];
+  while (updatedCells.size < gridState.cellsToUpdate && attempts < gridState.totalCells) {
+    const cell = gridState.cells[Math.floor(Math.random() * gridState.totalCells)];
     const lastUpdate = gridState.lastUpdated.get(cell);
 
     // Only update cells that haven't been updated recently
-    if (
-      (!lastUpdate || Date.now() - lastUpdate >= CELL_COOLDOWN_MS) &&
-      !updatedCells.has(cell)
-    ) {
+    if ((!lastUpdate || Date.now() - lastUpdate >= CELL_COOLDOWN_MS) && !updatedCells.has(cell)) {
       updateCellWithTimeout(cell);
       updatedCells.add(cell);
       gridState.lastUpdated.set(cell, Date.now());
